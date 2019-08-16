@@ -20,6 +20,7 @@ public class Registartion_stu extends AppCompatActivity {
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner2);
         spinner.setAdapter(streamsArray);
+
         spinner.setSelection(0);
     }
 
