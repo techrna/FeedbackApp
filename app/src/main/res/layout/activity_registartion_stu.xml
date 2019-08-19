@@ -65,7 +65,7 @@
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/colorWhite"
         android:ems="10"
-        android:hint="Email-id"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/colorWhite"
         app:layout_constraintStart_toStartOf="parent"
