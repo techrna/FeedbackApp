@@ -24,6 +24,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.firebase:firebase-core:15.0.0'
+    implementation 'com.google.firebase:firebase-database:15.0.0'
+    implementation 'com.firebase:firebase-client-android:2.4.0'
+
+    apply plugin: 'announce'
 
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
