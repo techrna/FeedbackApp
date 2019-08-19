@@ -130,7 +130,7 @@
         android:layout_marginLeft="100dp"
         android:backgroundTint="@color/colorWhite"
         android:ems="10"
-        android:hint="Roll number k"
+        android:hint="Roll No."
         android:inputType="textPersonName"
         android:textColorHint="@color/colorWhite"
         app:layout_constraintStart_toStartOf="parent"
