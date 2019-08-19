@@ -35,7 +35,7 @@
 
         android:backgroundTint="@color/colorWhite"
         android:ems="10"
-        android:hint="First Name"
+        android:hint="Name"
         android:inputType="textPersonName"
         android:textColorHint="@color/colorWhite"
         app:layout_constraintStart_toStartOf="parent"
