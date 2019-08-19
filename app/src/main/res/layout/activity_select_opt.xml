@@ -29,7 +29,6 @@
         android:layout_marginLeft="96dp"
         android:layout_marginTop="68dp"
         android:background="@drawable/rounded_button"
-
         android:text="Student"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
