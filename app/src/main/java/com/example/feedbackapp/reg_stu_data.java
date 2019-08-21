@@ -13,6 +13,22 @@ public class reg_stu_data {
     private String bstart;
     private String bend;
 
+    private String password;
+
+
+
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+
 
 
     public String getYear() {

@@ -1,5 +1,6 @@
 package com.example.feedbackapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Random;
 
 public class Registartion_stu extends AppCompatActivity {
 
@@ -27,12 +30,12 @@ public class Registartion_stu extends AppCompatActivity {
 
     public static final String Database_Path = "Student_Details_Database";
 
-
+    Intent intent;
 
     EditText etname,etemailid,etmobileno,etaddress,etrollno;
     Spinner spgender,spstream,spstreamyear,spbstart,spbend;
     Button btsubmit;
-    String name,email,mobileno,address,gender,stream,year,rollno,bstart,bend;
+    String name,email,mobileno,address,gender,stream,year,rollno,bstart,bend,password;
 
 
 
@@ -43,7 +46,7 @@ public class Registartion_stu extends AppCompatActivity {
         setContentView(R.layout.activity_registartion_stu);
 
 
-
+        intent=new Intent(this,com.example.feedbackapp.ui.login.LoginActivity.class);
         firebase = FirebaseDatabase.getInstance();
         databaseReference = firebase.getReference("registration");
 
@@ -142,13 +145,16 @@ public class Registartion_stu extends AppCompatActivity {
                 stu_details.setRollno(rollno);
                 stu_details.setStream(stream);
                 stu_details.setYear(year);
+                stu_details.setPassword(password);
 
-                String newUID=databaseReference.push().getKey();
+         // databaseReference.push().child(email).setValue(stu_details);
 
-                databaseReference.child(newUID).setValue(stu_details);
+                String e=email.substring(0,email.indexOf("@"));
+
+          databaseReference.child(e).setValue(stu_details);
 
                 Toast.makeText(Registartion_stu.this,"Register Successfully ", Toast.LENGTH_LONG).show();
-
+                startActivity(intent);
 
             }
         });
@@ -171,7 +177,35 @@ public class Registartion_stu extends AppCompatActivity {
         year=spstreamyear.getSelectedItem().toString();
         bstart=spbstart.getSelectedItem().toString();
         bend=spbend.getSelectedItem().toString();
+        password=PasswordGen();
 
+    }
+
+
+
+    public  String PasswordGen()
+    {
+     int len=8;
+        String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String Small_chars = "abcdefghijklmnopqrstuvwxyz";
+        String numbers = "0123456789";
+
+
+
+        String values = Capital_chars + Small_chars +
+                numbers ;
+
+        // Using random method
+        Random rndm_method = new Random();
+
+        String password="" ;
+
+        for (int i = 0; i < len; i++)
+        {
+            password+=values.charAt(rndm_method.nextInt(values.length()));
+
+        }
+        return password;
     }
 
 

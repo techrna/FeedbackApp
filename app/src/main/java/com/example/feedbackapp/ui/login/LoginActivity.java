@@ -21,17 +21,34 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.feedbackapp.R;
+import com.example.feedbackapp.reg_stu_data;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
     public Button crt_acct;
     Intent i;
     private LoginViewModel loginViewModel;
+    private FirebaseDatabase firebase;
+    private DatabaseReference databaseReference;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        firebase = FirebaseDatabase.getInstance();
+
+        databaseReference = firebase.getReference("registration");
+
+
+
         i = new Intent(this, com.example.feedbackapp.select_opt.class);
         crt_acct = findViewById(R.id.crt_acct);
         crt_acct.setOnClickListener(new View.OnClickListener() {
@@ -118,9 +135,38 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+
+              //  Query mQueryRef = databaseReference.child("registration");
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                       if( dataSnapshot.hasChild(usernameEditText.getText().toString()))
+                       {
+
+                          reg_stu_data student=dataSnapshot.child(usernameEditText.getText().toString()).getValue(reg_stu_data.class);
+
+                         if(passwordEditText.getText().toString().equals(student.getPassword()))
+                         {
+                             Toast.makeText(LoginActivity.this,"Login sucessfull ", Toast.LENGTH_LONG).show();
+
+                         }
+
+                       }
+                       else
+                       {
+                           Toast.makeText(LoginActivity.this,"Login Unsucessfull ", Toast.LENGTH_LONG).show();
+
+
+                       }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
             }
         });
     }
