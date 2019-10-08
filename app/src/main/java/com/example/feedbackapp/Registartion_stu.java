@@ -48,7 +48,7 @@ public class Registartion_stu extends AppCompatActivity {
 
         intent=new Intent(this,com.example.feedbackapp.ui.login.LoginActivity.class);
         firebase = FirebaseDatabase.getInstance();
-        databaseReference = firebase.getReference("registration");
+        databaseReference = firebase.getReference("teachers");
 
 
 
